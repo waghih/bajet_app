@@ -4,6 +4,7 @@ import { MyApp } from './app.component';
 import { Page1 } from '../pages/page1/page1';
 import { Page2 } from '../pages/page2/page2';
 import { DashboardPage } from '../pages/dashboard/dashboard';
+import { CategoryPage } from '../pages/category/category';
 import { Database } from '../providers/database';
 
 @NgModule({
@@ -11,7 +12,8 @@ import { Database } from '../providers/database';
     MyApp,
     Page1,
     Page2,
-    DashboardPage
+    DashboardPage,
+    CategoryPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -21,7 +23,8 @@ import { Database } from '../providers/database';
     MyApp,
     Page1,
     Page2,
-    DashboardPage
+    DashboardPage,
+    CategoryPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, Database]
 })

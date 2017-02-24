@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { Database } from '../../providers/database';
 import { Chart } from 'chart.js';
 
 /*
@@ -19,7 +20,7 @@ export class DashboardPage {
 	lineChart: any;
 	doughnutChart: any;
 
-	constructor(public navCtrl: NavController, public navParams: NavParams) {}
+	constructor(public navCtrl: NavController, public navParams: NavParams, public dataService: Database) {}
 
 	ionViewDidLoad() {
 		this.lineChart = new Chart(this.lineCanvas.nativeElement, {

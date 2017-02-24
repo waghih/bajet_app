@@ -17,18 +17,23 @@ export class Database {
 		if(!this.isOpen) {
             this.storage = new SQLite();
             this.storage.openDatabase({name: "data.db", location: "default"}).then(() => {
-            	// this.storage.executeSql("DROP TABLE reception",[]);
-                this.storage.executeSql("CREATE TABLE IF NOT EXISTS transaction (id INTEGER PRIMARY KEY AUTOINCREMENT, amount REAL, category TEXT, monthly_repeat BOOLEAN, created_at NUMERIC, month TEXT, day INTEGER, year INTEGER)", []);
+            	this.storage.executeSql("DROP TABLE IF EXISTS record",[]);
+            	this.storage.executeSql("DROP TABLE IF EXISTS category",[]);
+                this.storage.executeSql("CREATE TABLE IF NOT EXISTS record (id INTEGER PRIMARY KEY AUTOINCREMENT, amount REAL, category TEXT, repeated INTEGER, created_at TEXT, day INTEGER, month TEXT, year INTEGER)", []);
                 this.storage.executeSql("CREATE TABLE IF NOT EXISTS category (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, color TEXT)", []).then((data) => {
-                	this.storage.executeSql("INSERT INTO category (name, color) VALUES (?, ?)", ["Food & Beverage","#2662c1"]);
-                	this.storage.executeSql("INSERT INTO category (name, color) VALUES (?, ?)", ["Home Appliance","#c64d51"]);
-                	this.storage.executeSql("INSERT INTO category (name, color) VALUES (?, ?)", ["Fuel","#53a054"]);
-                	this.storage.executeSql("INSERT INTO category (name, color) VALUES (?, ?)", ["Transportation","#53a089"]);
-                	this.storage.executeSql("INSERT INTO category (name, color) VALUES (?, ?)", ["Car","#5953a0"]);
-                	this.storage.executeSql("INSERT INTO category (name, color) VALUES (?, ?)", ["Grocery","#9953a0"]);
-                	this.storage.executeSql("INSERT INTO category (name, color) VALUES (?, ?)", ["Loan","#a07053"]);
-                	this.storage.executeSql("INSERT INTO category (name, color) VALUES (?, ?)", ["Tax","#e89696"]);
-                	this.storage.executeSql("INSERT INTO category (name, color) VALUES (?, ?)", ["Insurance","#96dbe8"]);
+                	this.storage.executeSql("SELECT * FROM category ORDER BY name", []).then((data) => {
+	                	if(data.rows.length == 0) {
+		                	this.storage.executeSql("INSERT INTO category (name, color) VALUES (?, ?)", ["Food & Beverage","#2662c1"]);
+		                	this.storage.executeSql("INSERT INTO category (name, color) VALUES (?, ?)", ["Home Appliance","#c64d51"]);
+		                	this.storage.executeSql("INSERT INTO category (name, color) VALUES (?, ?)", ["Fuel","#53a054"]);
+		                	this.storage.executeSql("INSERT INTO category (name, color) VALUES (?, ?)", ["Transportation","#53a089"]);
+		                	this.storage.executeSql("INSERT INTO category (name, color) VALUES (?, ?)", ["Car","#5953a0"]);
+		                	this.storage.executeSql("INSERT INTO category (name, color) VALUES (?, ?)", ["Grocery","#9953a0"]);
+		                	this.storage.executeSql("INSERT INTO category (name, color) VALUES (?, ?)", ["Loan","#a07053"]);
+		                	this.storage.executeSql("INSERT INTO category (name, color) VALUES (?, ?)", ["Tax","#e89696"]);
+		                	this.storage.executeSql("INSERT INTO category (name, color) VALUES (?, ?)", ["Insurance","#96dbe8"]);                		
+	                	}                		
+                	});
                 });
                 this.isOpen = true;
             });
@@ -57,7 +62,7 @@ export class Database {
 
 	public createTransaction(transaction) {
         return new Promise((resolve, reject) => {
-            this.storage.executeSql("INSERT INTO transaction (amount, category, monthly_repeat, created_at, month, day, year) VALUES (?, ?, ?, ?, ?, ?, ?)", [transaction.amount, transaction.category, transaction.monthly_repeat, transaction.created_at, transaction.month, transaction.day, transaction.year]).then((data) => {
+            this.storage.executeSql("INSERT INTO record (amount, category, monthly_repeat, created_at, month, day, year) VALUES (?, ?, ?, ?, ?, ?, ?)", [transaction.amount, transaction.category, transaction.monthly_repeat, transaction.created_at, transaction.month, transaction.day, transaction.year]).then((data) => {
                 resolve(data);
             }, (error) => {
                 reject(error);
@@ -76,7 +81,7 @@ export class Database {
     }
 
     public deleteTransaction(id) {
-    	let sql = 'DELETE FROM transaction WHERE id = (?)';
+    	let sql = 'DELETE FROM record WHERE id = (?)';
     	return new Promise((resolve, reject) => {
             this.storage.executeSql(sql,[id]).then((data) => {
                 resolve(data);
