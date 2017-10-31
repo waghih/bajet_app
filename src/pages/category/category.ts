@@ -14,15 +14,15 @@ import { Database } from '../../providers/database';
 })
 export class CategoryPage {
 
-	category = [];
+	categories = [];
 
 	constructor(public navCtrl: NavController, public navParams: NavParams, public dataService: Database) {}
 
 	public load() {
 		this.dataService.getCategory().then((result) => {
-		this.category = <Array<Object>> result;
+		this.categories = <Array<Object>> result;
 			console.log("after load");
-			console.log(this.category);
+			console.log(this.categories);
 		}, (error) => {
 			console.log("Error: ", error);
 		});
@@ -34,6 +34,12 @@ export class CategoryPage {
 
 	ionViewDidLoad() {
 		console.log('ionViewDidLoad CategoryPage');
+	}
+
+	categoryColor(color) {
+		return {
+			'background':color
+		}
 	}
 
 }

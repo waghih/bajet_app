@@ -1,11 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
-
-import { Page1 } from '../pages/page1/page1';
-import { Page2 } from '../pages/page2/page2';
 import { DashboardPage } from '../pages/dashboard/dashboard';
 import { CategoryPage } from '../pages/category/category';
+import { Database } from '../providers/database';
 
 
 @Component({
@@ -14,25 +12,24 @@ import { CategoryPage } from '../pages/category/category';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = DashboardPage;
+  rootPage: any;
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform) {
+  constructor(public platform: Platform, public database: Database) {
     this.initializeApp();
-
     // used for an example of ngFor and navigation
-    this.pages = [
-      { title: 'Dashboard', component: DashboardPage },
-      { title: 'Category', component: CategoryPage },
-      { title: 'Page One', component: Page1 },
-      { title: 'Page Two', component: Page2 }
-    ];
 
   }
 
   initializeApp() {
     this.platform.ready().then(() => {
+    this.rootPage = DashboardPage;
+      this.pages = [
+        { title: 'Dashboard', component: DashboardPage },
+        { title: 'Category', component: CategoryPage },
+      ];
+      // this.nav.setRoot(DashboardPage);
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();

@@ -4,33 +4,44 @@
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
+<ion-header class="transparent-header" color="dark">
 
-  <ion-navbar>
+  <ion-navbar color="primary">
   	<button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
+      <ion-icon name="apps"></ion-icon>
     </button>
-    <ion-title>Dashboard</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content>
-	<ion-card>
-      <ion-card-header>
-        Doughnut Chart
-      </ion-card-header>
-      <ion-card-content>
-        <canvas #doughnutCanvas></canvas>
-      </ion-card-content>
-    </ion-card>
-	<ion-card>
-      <ion-card-header>
-        Line Chart
-      </ion-card-header>
-      <ion-card-content>
-        <canvas #lineCanvas></canvas>
-      </ion-card-content>
-    </ion-card>
+  <div class="wallet-container">
+    <div class="wallet-body">
+      Wallet Balance
+      <h1>$ {{wallet_balance}}</h1>
+      <sup>- $ {{wallet_spent}}</sup>
+    </div>
+    
+    
+  </div>
+  <div class="wallet-chart">
+    <canvas #doughnutCanvas></canvas>    
+  </div>
+	<!-- <ion-card>
+    <ion-card-header>
+      Line Chart
+    </ion-card-header>
+    <ion-card-content>
+      <canvas #lineCanvas></canvas>
+    </ion-card-content>
+  </ion-card> -->
 </ion-content>
+<ion-footer class="transparent-header">
+  <ion-grid>
+    <ion-row>
+      <ion-col col-6><button ion-button block color="secondary" (click)="addTransaction('income')">INCOME</button></ion-col>
+      <ion-col col-6><button ion-button block color="danger" (click)="addTransaction('expense')">EXPENSE</button></ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

@@ -1,3 +1,42 @@
 page-dashboard {
+	.wallet-container {
+		padding:10px 0px;
+	    color: #fff;
+	    background: #387ef5;
+	    //background: #222;
+    	border-radius: 0px 0px 5px 5px;
+	    align-items: center;
+	    text-align: center;
+	    box-shadow: 0px 2px 2px 0 rgba(0,0,0,.14), 0 3px 10px -10px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);
+	}
 
+	.transparent-header {
+		&:after, &:before {
+			background-image: none;
+		}
+	}
+
+	.wallet-body {
+		width: 100%;
+	    font-size: 2rem;
+	    font-weight: 200;
+
+	    h1 {
+	    	margin-top: 0;
+	    	margin-bottom: 0;
+	    	font-size: 4rem;
+	    }
+
+	    sup {
+	    	color: #f53d3d;
+	    }
+	}
+
+	.header-ios .toolbar-background-ios, .footer-ios .toolbar-background-ios {
+	    border-style: none;
+	}
+
+	.wallet-chart {
+		margin: 10px;
+	}
 }

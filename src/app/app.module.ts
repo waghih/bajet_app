@@ -6,6 +6,9 @@ import { Page2 } from '../pages/page2/page2';
 import { DashboardPage } from '../pages/dashboard/dashboard';
 import { CategoryPage } from '../pages/category/category';
 import { Database } from '../providers/database';
+import { HomePage } from '../pages/home/home';
+import { AddTransactionPage } from '../pages/add-transaction/add-transaction';
+
 
 @NgModule({
   declarations: [
@@ -13,7 +16,9 @@ import { Database } from '../providers/database';
     Page1,
     Page2,
     DashboardPage,
-    CategoryPage
+    CategoryPage,
+    HomePage,
+    AddTransactionPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -24,7 +29,9 @@ import { Database } from '../providers/database';
     Page1,
     Page2,
     DashboardPage,
-    CategoryPage
+    CategoryPage,
+    HomePage,
+    AddTransactionPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, Database]
 })

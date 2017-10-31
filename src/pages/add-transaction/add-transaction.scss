@@ -1,0 +1,16 @@
+page-add-transaction {
+	.capitalize {
+		text-transform: capitalize;
+		font-weight: 500;
+	}
+
+	.padding-right {
+		padding-right: 16px;
+	}
+
+	.button-container-bottom {
+		position: absolute;
+		width: 100%;
+		bottom: 0;
+	}
+}
